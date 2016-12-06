@@ -12,7 +12,7 @@ SHIFT = 200
 
 train.raw = "C:/Users/LEE/Desktop/project5/train.csv"
 test.raw = "C:/Users/LEE/Desktop/project5/test.csv"
-submission = "C:/Users/LEE/Desktop/project5/sample_submission.csv"
+submission.f = "C:/Users/LEE/Desktop/project5/sample_submission.csv"
 
 
 train = fread(train.raw, showProgress = TRUE)
@@ -43,8 +43,8 @@ remove.features <- c("cat67","cat21","cat60","cat65", "cat32", "cat30",
                       "cat33", "cat34", "cat46", "cat47", "cat48", "cat68",
                       "cat35", "cat20", "cat69", "cat70", "cat15", "cat62")
 
-new.train = train_test[1:ntrain,-remove.features, with = FALSE]
-new.test = train_test[(ntrain+1):nrow(train_test),-remove.features, with = FALSE]
+new.train = train.test[1:num.train,-remove.features, with = FALSE]
+new.test = train.test[(num.train+1):nrow(train.test),-remove.features, with = FALSE]
 
 
 
@@ -77,6 +77,6 @@ best_nrounds = 545
 
 gbdt = xgb.train(xgb_params, dtrain, nrounds=as.integer(best_nrounds/0.8))
 
-submission = fread(SUBMISSION_FILE, colClasses = c("integer", "numeric"))
+submission = fread(submission.f, colClasses = c("integer", "numeric"))
 submission$loss = exp(predict(gbdt,dtest)) - SHIFT
 write.csv(submission,'sub.csv',row.names = FALSE)
