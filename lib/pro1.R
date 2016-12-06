@@ -35,7 +35,6 @@ for (f in features) {
     train.test[[f]] <- as.integer(factor(train.test[[f]], levels=levels))
   }
 }
-
 # in order to speed up fit within Kaggle scripts 
 remove.features <- c("cat67","cat21","cat60","cat65", "cat32", "cat30",
                       "cat24", "cat74", "cat85", "cat17", "cat14", "cat18",
