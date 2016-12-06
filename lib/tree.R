@@ -15,7 +15,7 @@ mae1<-mean(abs(fit.model1-mat_test1$loss))
 ##Using PCA components and 5 large categories variables
 model2<-rpart(loss~.,data=pc_train_dat,method="anova",control=mycontrol)
 
-pruned_fit2<-prune(model2,cp=model2$cptable[which.min(model1$cptable[,"xerror"]),"CP"])
+pruned_fit2<-prune(model2,cp=model2$cptable[which.min(model2$cptable[,"xerror"]),"CP"])
 
 fit.model2<-predict(pruned_fit2,newdata=pc_test_dat)
 
